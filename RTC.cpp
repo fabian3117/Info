@@ -1,8 +1,9 @@
 #include"RTC.h"
-RTC::RTC(){
+/*
+RTC::RTC(double Anio=2022,double Mes=1,double Dia=1,bool Formato=Format_PM,double Hora=12,double Min=0,double Seg=0){
 
 
-};
+};*/
 RTC::RTC(uint8_t SLK,uint8_t IO,uint8_t CE){
 this->SLK=SLK;
 this->IO=IO;
@@ -39,9 +40,9 @@ void RTC::initRTC(){
   DS1302_write (DS1302_TRICKLE, 0x00);
 }
 void RTC::DS1302_write(uint32_t address,uint8_t data){
-     bitClear( address, DS1302_READBIT);                                                                    //|    |
+    // bitClear( address, DS1302_READBIT);                                                                    //|    |
 
-    _DS1302_start();                                                                                       //|    |
+    //_DS1302_start();                                                                                       //|    |
 
   // don't release the I/O-line                                                                          //|    |
   //_DS1302_togglewrite( address, false);                                                                  //|    |
@@ -52,8 +53,8 @@ void RTC::DS1302_write(uint32_t address,uint8_t data){
 
 }
 void RTC::_DS1302_start(void){
-    
-     digitalWrite(CE, LOW );                 // default, not enabled                            //|    |
+  /*  
+  digitalWrite(CE, LOW );                 // default, not enabled                            //|    |
   pinMode( CE, OUTPUT );                                                                      //|    |
 
   digitalWrite(SLK, LOW );               // default, clock low                              //|    |
@@ -62,10 +63,10 @@ void RTC::_DS1302_start(void){
   pinMode( IO, OUTPUT );                                                                      //|    |
 
   digitalWrite(CE, HIGH );                // start the session                               //|    |
-  delayMicroseconds( 4 );  
+  delayMicroseconds( 4 );  */
 }
 void RTC::updateTime(void){
-DS1302_clock_burst_read( (uint8_t *) &rtc);               // Read all clock data at once (burst mode)
+//DS1302_clock_burst_read( (uint8_t *) &rtc);               // Read all clock data at once (burst mode)
 
 
 }
@@ -74,15 +75,16 @@ int i;                                                                          
   _DS1302_start();                                                                                       //|    |
                                                                                                          //|    |
 // Instead of the address, the CLOCK_BURST_READ command is issued the I/O-line is released for the data  //|    |
-  _DS1302_togglewrite( DS1302_CLOCK_BURST_READ, true);                                                   //|    |
+  /*_DS1302_togglewrite( DS1302_CLOCK_BURST_READ, true);                                                   //|    |
                                                                                                          //|    |
   for( i=0; i<8; i++)  {                                                                                 //|    |
     *p++ = _DS1302_toggleread();                                                                         //|    |
   }                                                                                                      //|    |
   _DS1302_stop();    
-
+*/
 }
 void RTC::_DS1302_togglewrite( uint8_t data, uint8_t release)  {                              //|    |
+/*
   int i;                                                                                                 //|    |
                                                                                                          //|    |
   for( i = 0; i <= 7; i++ )  {                                                                           //|    |
@@ -103,5 +105,5 @@ void RTC::_DS1302_togglewrite( uint8_t data, uint8_t release)  {                
       digitalWrite( DS1302_SCLK_PIN, LOW );                                                              //|    |
       delayMicroseconds( 1 );                                   // tCL=1000ns, tCDD=800ns                //|    |
     }                                                                                                    //|    |
-  }                                                                                                      //|    |
+  }   */                                                                                                   //|    |
 }     

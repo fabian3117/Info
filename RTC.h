@@ -48,6 +48,9 @@
 #define DS1302_TCS3  DS1302_D7                                                                           //| 
 
 
+#define Format_PM true
+#define Fromat_AM false
+
 
 #define Write(x) (x<<1)|(0x1<<7)          //-->   Deja listo para enviar como escritura       - 1-0-A4-A3-A2-A1-A0-0    <--
 #define Read(x) (x<<1)|(0x1<<7)|(0x1)    //-->    Deja listo para enviar como Lectura         - 1-0-A4-A3-A2-A1-A0-1    <--
@@ -55,7 +58,8 @@
 class RTC{
 
         public: 
-RTC();
+//RTC();  //-->   El constructor por defecto Instancia todo en una fecha base     <--
+RTC(double Anio=2022,double Mes=1,double Dia=1,bool Formato=Format_PM,double Hora=12,double Min=0,double Seg=0);   //-->        Esto hace de constructor por defecto    <--
 RTC(uint8_t SLK,uint8_t IO,uint8_t CE);
 void setSegundos(uint8_t);
 void setMinutos(uint8_t);
@@ -72,12 +76,13 @@ uint8_t getHora();
 uint8_t getDia();
 uint8_t getMes();
 uint16_t getAnio();
+bool Format();  //-->   Te dice que formato tiene si AM-PM      <--
 
 void initRTC();
 
         private:
 uint8_t SLK,IO,CE;
-
+bool Formato;
 uint8_t Segundos;                                                                                     //|
 uint8_t Minutos;                                                                                     //|
 uint8_t Horas;                                                                                       //|
@@ -92,4 +97,5 @@ int Anios;
   void _DS1302_stop();
   void updateTime();
   void DS1302_clock_burst_read( uint8_t *p);
+  void _DS1302_togglewrite( uint8_t data, uint8_t release);
 };

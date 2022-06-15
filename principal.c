@@ -51,3 +51,31 @@ void I2C0_IRQHandler(void){
 	datos=(I2C0->SLVDAT&0xFF);	//-->	Elimino la basura osea los bits del 8 en adelante
 	return;
 }
+		//-->	Estados	<<--
+	
+#define ESTADO_INICIA 0
+#define ESTADO_REPO 1
+#define ESTADO_AJUT	2
+static uint8_t Estado = ESTADO_INICIA;
+
+int main (void){
+//-->	Tengo que hacer los estados	<--
+//-->	Reposo (Mostrando contenido de memoria y reposo) - Ajustes (Menu visual) <--
+switch(Estado){
+	case ESTADO_INICIA:
+//-->	Tengo que hacer las verificaciones y lecturas de memoria correspondientes	<--
+//-->	Motor Inicia	<--
+//-->	Leds Prende		<--
+
+	break;
+	case ESTADO_REPO:
+	
+	
+	break;
+	case ESTADO_AJUT:
+
+
+	break;
+}
+return 0;
+}
