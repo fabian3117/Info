@@ -1,31 +1,26 @@
-#include"Leds.h"
-Leds::Leds(){
-//-->   Constructor por defecto <--
+/*
+ * Leds.cpp
+ *
+ *  Created on: 16 jun. 2022
+ *      Author: nahuu
+ */
 
-//color[]={Color_R,Color_R,Color_R,Color_R,Color_R,Color_R};
-for(int i=0;i<LedsCant;i++){
-color[i]=Color_R;
-buff[i]=false;
-}
-led=0;
+#include "Leds.h"
 
-}
-bool Leds::GetStatus(uint8_t led){
-    if(led<LedsCant){
-        return buff[led];
-    }
-return false;
+void Leds::SetStatus(bool statud){
+	SetEstado(statud);
+	//Estado=statud;
+	Activa();
 
 }
-void Leds::SetColor(uint8_t Led,uint8_t Color){
-    if(Led<LedsCant){
-        color[Led]=Color;
-        }
-    //(Led<LedsCant)?color[Led]=Color:return;
+void Leds::Apagar(){
+
+SetEstado(false);
+Activa();
 }
-void Leds::SetStatus(uint8_t Led,bool estado){
-if(Led<LedsCant){
-buff[Led]=estado;
-}
-    
+void Leds::Prender(){
+
+	SetEstado(true);
+	Activa();
+
 }
